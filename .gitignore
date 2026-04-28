@@ -1,0 +1,11 @@
+# Real secrets — NEVER upload to GitHub
+.env
+.webtest.http
+
+# Installed libraries — npm install recreates these
+node_modules/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/settings.json

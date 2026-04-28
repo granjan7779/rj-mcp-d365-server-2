@@ -1,0 +1,57 @@
+### 1 – Health check
+GET http://localhost:3000/health
+
+### 2 – List all tools (REST)
+GET http://localhost:3000/tools
+
+### 3 – Read 1 open pick line
+POST http://localhost:3000/tools/readOpenLines
+Content-Type: application/json
+
+{
+  "subscriptionId":  "so_out_pick",
+  "numberOfRecords": 1
+}
+
+### 4 – Confirm work order (all fields from Foundry)
+POST http://localhost:3000/tools/confirmWork
+Content-Type: application/json
+
+{
+  "workLinePairId":     "MHWKL-000000002",
+  "workLineRecId":      "68719480119",
+  "fromLicensePlate":   "LP24NEW",
+  "targetLicensePlate": "LP24NEW",
+  "workLineNumber":     "1",
+  "quantity":           "24",
+  "workLinePairIdRef":  "MHWKL-000000002",
+  "workType":           "Pick",
+  "fromLocation":       "FL-001",
+  "inboundTransType":   "WorkConfirm",
+  "messageId":          "msg-ABC1234567"
+}
+
+### 5 – Missing required param (expect error)
+POST http://localhost:3000/tools/confirmWork
+Content-Type: application/json
+
+{
+  "workLinePairId": "MHWKL-000000002"
+}
+
+### 6 – Invalid messageId (expect validation error)
+POST http://localhost:3000/tools/confirmWork
+Content-Type: application/json
+
+{
+  "workLinePairId":     "MHWKL-000000002",
+  "workLineRecId":      "68719480119",
+  "fromLicensePlate":   "LP24NEW",
+  "targetLicensePlate": "LP24NEW",
+  "workLineNumber":     "1",
+  "quantity":           "24",
+  "workType":           "Pick",
+  "fromLocation":       "FL-001",
+  "inboundTransType":   "WorkConfirm",
+  "messageId":          "Full-68719480119-MHOUT-000000003"
+}
